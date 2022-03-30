@@ -67,6 +67,14 @@ while [ $n -ge 0 ]; do
 				mv "$inputfolder""$book" "$binfolder"
 				mv "$outputfolder""$book".chapters.txt "$outputfolder"chapters
 				echo Finished Converting
+				#make sure all single file m4b's are in their own folder
+				echo Putting the m4b into a folder
+				for file in $outputfolder*.m4b; do
+					if [[ -f "$file" ]]; then
+						mkdir "${file%.*}"
+						mv "$file" "${file%.*}"
+					fi
+				done
 				echo Deleting duplicate mp3 audiobook folder
 			fi
 		done
