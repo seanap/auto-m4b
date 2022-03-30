@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  auto-m4b:
+    image: seanap/auto-m4b
+    container_name: auto-m4b
+    volumes:
+      - /path/to/config:/config
+      - /path/to/temp:/temp
