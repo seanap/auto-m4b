@@ -1,55 +1,50 @@
-# Auto-M4B-Tool
-This container is mostly based on the powerful m4b-tool made by sandreas
-https://github.com/sandreas/m4b-tool
-This repo is my fork of the fantastic docker-m4b-tool created by 9Mad-Max5 https://github.com/9Mad-Max5/docker-m4b-tool.  
+# Auto-M4B
+This container is mostly based on the powerful [m4b-tool](https://github.com/sandreas/m4b-tool) made by sandreas
+This repo is my fork of the fantastic [docker-m4b-tool](https://github.com/9Mad-Max5/docker-m4b-tool) created by 9Mad-Max5. 
 
-The differences between this fork and 9Mad-Max5's are subtle; I have cleaned up the temp folders needed, and I've added a few lines to make sure all single file books are put inside their own folder. This is important for integration with the Audible Beets.io plug-in https://github.com/Neurrone/beets-audible
+This is a docker container that will watch a folder for new books, auto convert mp3 books to chapterized m4b, and move all m4b books to a specific output folder, this output folder is where the [beets.io audible plugin](https://github.com/seanap/beets-audible) will look for audiobooks and use the audible api to perfectly tag and organize your books.
 
 ## Intended Use
 This docker assumes all untagged books (mp3 & m4b) start their journey in a "recentlyadded" folder.  Every 5min this will monitor that "recentlyadded" folder for mp3 books, then automatically convert them to a chapterized m4b.  The chapters are based on the mp3 tracks. Then it will output all m4b books to a specific output folder where they wait to be tagged. This fork is intended to work seamlessly with my fork of the audible beets.io plugin https://github.com/seanap/beets-audible
 
-This is NOT needed if:
-* All your books are already m4b
-* You actually want mp3's
-
-Using torrents and need to preserve seeding?
-* In the settings of your client add this line to "Run external program on torrent completion"
-  * `cp -r "%F" "path/to/temp/recentlyadded"`
+## Using torrents and need to preserve seeding?
+In the settings of your client add this line to `Run external program on torrent completion`, it will copy all finished torrent files to your "recentlyadded" folder:
+* `cp -r "%F" "path/to/temp/recentlyadded"`
 
 ## How to use
 This docker assumes the following folder structure:
 
-```
-temp   
+<pre>
+<b>temp</b>
 │
-└───recentlyadded
-│   │   book1.m4b
-│   |   book2.mp3
-|   └───book3
-│       │   01-book3.mp3
-│       │   ... 
-└───mp3merge
-│   └───book2
-│       │   01-book2.mp3
-│       │   ...
-│   └───book3
-│       │   01-book3.mp3
-│       │   ...
-└──-untagged
-│   └───book4
-│       │   book4.m4b
-└───delete
+└───<b>recentlyadded</b> # Input folder Add new books here
+│   │     book1.m4b
+│   |     book2.mp3
+|   └─────book3
+│         │   01-book3.mp3
+│         │   ... 
+└───<b>mp3merge</b> # folder the script uses to combine mp3's
+│   └─────book2
+│         │   01-book2.mp3
+│         │   ...
+│   └─────book3
+│         │   01-book3.mp3
+│         │   ...
+└───<b>untagged</b> # Output folder where all m4b's wait to be tagged
+│   └─────book4
+│         │   book4.m4b
+└───<b>delete</b> # needed by the script
 |
-└───backup
-    └───book2
-        │   01-book2.mp3
-        │   ... 
-    └───book3
-        │   01-book3.mp3
-        │   ...
-```
+└───<b>backup</b> # Backups incase anything goes wrong
+    └─────book2
+          │   01-book2.mp3
+          │   ... 
+    └─────book3
+          │   01-book3.mp3
+          │   ...
+</pre>
 
-This script will watch `/temp/recentlyadded` and automatically move mp3 books to `/temp/mp3merge`, and put all m4b's in the output folder `/temp/untagged`.  It also makes a backup incase something goes wrong.
+This script will watch `/temp/recentlyadded` and automatically move mp3 books to `/temp/mp3merge`, then automatically put all m4b's in the output folder `/temp/untagged`.  It also makes a backup incase something goes wrong.
 
 ## Set up the Container
 
