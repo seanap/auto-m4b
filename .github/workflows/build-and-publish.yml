@@ -41,7 +41,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           # relative path to the place where source code with Dockerfile is located
-          context: /
+          context: .
+          file: ./Dockerfile
           # Note: tags has to be all lower-case
           tags: |
             seanap/auto-m4b:latest 
