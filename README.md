@@ -12,11 +12,6 @@ This is meant to be an automated step between aquisition and tagging.
 
 Use the [beets.io audible plugin](https://github.com/seanap/beets-audible) to finish the tagging and sorting.
 
-## Why
-
-Single file books are much easier on your system, I've noticed significant improvements in windows file explorer, plex library refresh times, app library scroling, etc.  A lot of apps can choke on large number of files, this is an automated way to keep your filecount as low as possible.
-The beets plugin requires all books files to be inside a folder.
-
 ## Known Limitations
 
 * The chapters are based on the mp3 tracks. A single mp3 file will become a single m4b with 1 chapter, also if the mp3 filenames are garbarge then your m4b chapternames will be terrible as well.
