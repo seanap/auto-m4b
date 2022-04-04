@@ -2,9 +2,9 @@
 # set m to 1
 m=1
 # variable defenition
-inputfolder="/temp/mp3merge/"
-outputfolder="/temp/untagged/"
 originalfolder="/temp/recentlyadded/"
+outputfolder="/temp/untagged/"
+inputfolder="/temp/merge/"
 fixitfolder="/temp/fix"
 backupfolder="/temp/backup/"
 binfolder="/temp/delete/"
