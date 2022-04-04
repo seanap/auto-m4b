@@ -1,5 +1,5 @@
 # Auto-M4B
-This container is mostly based on the powerful [m4b-tool](https://github.com/sandreas/m4b-tool) made by sandreas
+This container is mostly based on the powerful [m4b-tool](https://github.com/sandreas/m4b-tool) made by sandreas  
 This repo is my fork of the fantastic [docker-m4b-tool](https://github.com/9Mad-Max5/docker-m4b-tool) created by 9Mad-Max5. 
 
 This is a docker container that will watch a folder for new books, auto convert mp3 books to chapterized m4b, and move all m4b books to a specific output folder, this output folder is where the [beets.io audible plugin](https://github.com/seanap/beets-audible) will look for audiobooks and use the audible api to perfectly tag and organize your books.
@@ -8,7 +8,8 @@ This is a docker container that will watch a folder for new books, auto convert 
 Install via docker-compose
 This is meant to be an automated step between aquisition and tagging.
 * Save new audiobooks to a /recentlyadded folder.
-* All multifile m4b/mp3/m4a/ogg books will be converted to a chapterized m4b and saved to an /untagged folder
+* All multifile m4b/mp3/m4a/ogg books will be converted to a chapterized m4b and saved to an /untagged folder  
+
 Use the [beets.io audible plugin](https://github.com/seanap/beets-audible) to finish the tagging and sorting.
 
 ## Why
