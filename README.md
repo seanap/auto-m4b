@@ -14,7 +14,7 @@ Use the [beets.io audible plugin](https://github.com/seanap/beets-audible) to fi
 
 ## Known Limitations
 
-* The chapters are based on the mp3 tracks. A single mp3 file will become a single m4b with 1 chapter, also if the mp3 filenames are garbarge then your m4b chapternames will be terrible as well.
+* The chapters are based on the mp3 tracks. A single mp3 file will become a single m4b with 1 chapter, also if the mp3 filenames are garbarge then your m4b chapternames will be terrible as well.  See section on Chapters below for how to manually adjust.
 * Right now book folders with nested subfolders will be moved to a /fix folder for manual filename/folder fixing.  It should be possible to modify the auto-m4b-tool.sh script to automatically prefix the subfoldername and move the files up a level, let me know if you know how to do this.
 * There's no options or config file.  Things like cpu cores, the actual m4b-tool run command, and directories would be nice to have in a config file.  Right now it runs like a black box (tho default settings should be all you need).
 * The conversion process actually strips some tags and covers from the files, which is why you need to use a tagger (mp3tag or beets.io) before adding to Plex.
