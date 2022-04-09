@@ -2,7 +2,7 @@
 # set m to 1
 m=1
 # variable defenition
-CPUcores=6
+CPUcores=2
 inputfolder="/temp/mp3merge/"
 outputfolder="/temp/untagged/"
 originalfolder="/temp/recentlyadded/"
