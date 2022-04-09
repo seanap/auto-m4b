@@ -55,6 +55,13 @@ temp
 
 This script will watch `/temp/recentlyadded` and automatically move mp3 books to `/temp/merge`, then automatically put all m4b's in the output folder `/temp/untagged`.  It also makes a backup incase something goes wrong.
 
+## To Manually Set Chapters:
+1. Put a folder with mp3's in the `/temp/recentlyadded` and let the script process the book like normal
+2. In the output folder ( `/temp/untagged` ) there will be a book folder that includes the recently converted *.m4b and a *.chapters.txt file.
+3. Open the chapters file and edit/add/rename, then save
+4. Move the book folder (which contains the m4b and chapters.txt files) to `/temp/merge`
+5. When the script runs it will re-chapterize the m4b and move it back to `/temp/untagged`
+
 ## Set up the Container
 
 ### docker-compose.yml
@@ -72,7 +79,7 @@ services:
 To change any options you will need to exec into the docker container. By default only vim text editor is installed, you will need to do a `apt-get update && apt-get install nano` if you want to use nano to edit the scipt.  
 * `docker exec -it auto-m4b sh -c 'vi auto-m4b-tool.sh'`  
 
-To change the amount of cpu cores available for the converting change the `--jobs` flag in the m4b-tool command.  
+The script will automatically use all CPU cores available, to change the amount of cpu cores for the converting change the `--jobs` flag in the m4b-tool command, but do not set it higher than the amount of cores available.  
 
 More m4b-tool options https://github.com/sandreas/m4b-tool#reference
 
@@ -86,7 +93,4 @@ originalfolder="/temp/recentlyadded/"
 fixitfolder="/temp/fix"
 backupfolder="/temp/backup/"
 
-...
-
-m4b-tool merge "$book" -n -q --audio-bitrate="$bit" --skip-cover --use-filenames-as-chapters --audio-codec=libfdk_aac --jobs=4 --output-file="$m4bfile" --logfile="$logfile"
 ```
