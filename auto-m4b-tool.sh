@@ -3,7 +3,7 @@
 m=1
 # variable defenition
 CPUcores=$(nproc --all)
-inputfolder="/temp/mp3merge/"
+inputfolder="/temp/merge/"
 outputfolder="/temp/untagged/"
 originalfolder="/temp/recentlyadded/"
 fixitfolder="/temp/fix"
