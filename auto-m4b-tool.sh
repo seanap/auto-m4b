@@ -60,8 +60,8 @@ while [ $m -ge 0 ]; do
 		for book in *; do
 			if [ -d "$book" ]; then
 				mpthree=$(find "$book" -maxdepth 2 -type f \( -name '*.mp3' -o -name '*.m4b' \) | head -n 1)
-				m4bfile=$outputfolder$book/$book$m4bend
-				logfile=$outputfolder$book/$book$logend
+				m4bfile="$outputfolder$book/$book$m4bend"
+				logfile="$outputfolder$book/$book$logend"
 				chapters=$(ls "$inputfolder$book"/*chapters.txt 2> /dev/null | wc -l)
 				if [ "$chapters" != "0" ]; then
 					echo Adjusting Chapters
