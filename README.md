@@ -76,7 +76,7 @@ services:
       - /path/to/temp:/temp
 ```
 ### Options
-To change any options you will need to exec into the docker container. By default only vim text editor is installed, you will need to do a `apt-get update && apt-get install nano` if you want to use nano to edit the scipt.  
+You shouldn't need to change any options, but if you want to you will need to exec into the docker container. By default only vim text editor is installed, you will need to do a `apt-get update && apt-get install nano` if you want to use nano to edit the scipt.  
 * `docker exec -it auto-m4b sh -c 'vi auto-m4b-tool.sh'`  
 
 The script will automatically use all CPU cores available, to change the amount of cpu cores for the converting change the `--jobs` flag in the m4b-tool command, but do not set it higher than the amount of cores available.  
