@@ -9,6 +9,7 @@ This is meant to be an automated step between aquisition and tagging.
 * Install via docker-compose 
 * Save new audiobooks to a /recentlyadded folder.
 * All multifile m4b/mp3/m4a/ogg books will be converted to a chapterized m4b and saved to an /untagged folder  
+* This script will watch `/temp/recentlyadded` and automatically move mp3 books to `/temp/merge`, then automatically put all m4b's in the output folder `/temp/untagged`.  It also makes a backup incase something goes wrong.
 
 Use the [beets.io audible plugin](https://github.com/seanap/beets-audible) to finish the tagging and sorting.
 
@@ -53,18 +54,21 @@ temp
             │   ... 
 ```
 
-This script will watch `/temp/recentlyadded` and automatically move mp3 books to `/temp/merge`, then automatically put all m4b's in the output folder `/temp/untagged`.  It also makes a backup incase something goes wrong.
+### Installation
 
-## To Manually Set Chapters:
-1. Put a folder with mp3's in the `/temp/recentlyadded` and let the script process the book like normal
-2. In the output folder ( `/temp/untagged` ) there will be a book folder that includes the recently converted *.m4b and a *.chapters.txt file.
-3. Open the chapters file and edit/add/rename, then save
-4. Move the book folder (which contains the m4b and chapters.txt files) to `/temp/merge`
-5. When the script runs it will re-chapterize the m4b and move it back to `/temp/untagged`
-
-## Set up the Container
-
-### docker-compose.yml
+1. Creat a `temp` folder, and create all the sub folders `recentlyadded`, `merge`, `untagged`, `delete`, `fix`, `backup` like above
+2. Install docker https://docs.docker.com/engine/install/ubuntu/
+3. Manage docker as non-root https://docs.docker.com/engine/install/linux-postinstall/
+4. Install docker-compose https://docs.docker.com/compose/install/
+5. Create the compose file:  
+    `nano docker-compose.yml`
+6. Paste the yaml code below into the compose file, and change the volume mount locations
+7. Put a test mp3 in the /temp/recentlyadded directory.
+8. Start the docker (It should convert the mp3 and leave it in your /temp/untagged directory. It runs automatically every 5 min)  
+    `docker-compose up -d`
+### Example docker-compose.yml
+Replace the `/path/to/...` with your actual folder locations, but leave the `:` and everything after:
+#### docker-compose.yml
 ```yaml
 version: '3.7'
 services:
@@ -75,22 +79,18 @@ services:
       - /path/to/config:/config
       - /path/to/temp:/temp
 ```
-### Options
+
+## To Manually Set Chapters:
+1. Put a folder with mp3's in the `/temp/recentlyadded` and let the script process the book like normal
+2. In the output folder ( `/temp/untagged` ) there will be a book folder that includes the recently converted *.m4b and a *.chapters.txt file.
+3. Open the chapters file and edit/add/rename, then save
+4. Move the book folder (which contains the m4b and chapters.txt files) to `/temp/merge`
+5. When the script runs it will re-chapterize the m4b and move it back to `/temp/untagged`
+
+## Advanced Options
 You shouldn't need to change any options, but if you want to you will need to exec into the docker container. By default only vim text editor is installed, you will need to do a `apt-get update && apt-get install nano` if you want to use nano to edit the scipt.  
 * `docker exec -it auto-m4b sh -c 'vi auto-m4b-tool.sh'`  
 
 The script will automatically use all CPU cores available, to change the amount of cpu cores for the converting change the `--jobs` flag in the m4b-tool command, but do not set it higher than the amount of cores available.  
 
 More m4b-tool options https://github.com/sandreas/m4b-tool#reference
-
-```sh
-auto-m4b-tool.sh
-
-# variable defenition
-inputfolder="/temp/merge/"
-outputfolder="/temp/untagged/"
-originalfolder="/temp/recentlyadded/"
-fixitfolder="/temp/fix"
-backupfolder="/temp/backup/"
-
-```
