@@ -67,7 +67,8 @@ temp
 8. Start the docker (It should convert the mp3 and leave it in your /temp/untagged directory. It runs automatically every 5 min)  
     `docker-compose up -d`
 ### Example docker-compose.yml
-Replace the `/path/to/...` with your actual folder locations, but leave the `:` and everything after:
+*  Replace the `/path/to/...` with your actual folder locations, but leave the `:` and everything after:  
+*  Replace the PUID and PGID with your user ( [?](https://www.carnaghan.com/knowledge-base/how-to-find-your-uiduserid-and-gidgroupid-in-linux-via-the-command-line/) )
 #### docker-compose.yml
 ```yaml
 version: '3.7'
@@ -78,6 +79,9 @@ services:
     volumes:
       - /path/to/config:/config
       - /path/to/temp:/temp
+    environment:
+      - PUID=1000
+      - PGID=1000
 ```
 
 ## To Manually Set Chapters:
