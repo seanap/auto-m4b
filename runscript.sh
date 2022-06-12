@@ -8,7 +8,7 @@ user_id="1001"
 
 # Create user if they don't exist
 if ! id -u "${PUID}" &>/dev/null; then
-    # If PUID is a create a user with that id
+    # If PUID is a number, create a user with that id
     if [[ "${PUID}" =~ ^[0-9]+$ ]]; then
         user_id="${PUID}"
     # otherwise create a user with the name from PUID
@@ -19,7 +19,7 @@ if ! id -u "${PUID}" &>/dev/null; then
     adduser \
         --uid "${user_id}" \
         "${user_name}"
-    echo "Created missing ${user_name}} user with UID ${user_id}"
+    echo "Created missing ${user_name} user with UID ${user_id}"
 fi
 
 cmd_prefix=""
