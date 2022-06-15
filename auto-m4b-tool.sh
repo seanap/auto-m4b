@@ -1,8 +1,7 @@
 #!/bin/bash
 # set m to 1
 m=1
-# variable defenition
-CPUcores=$(nproc --all)
+#variable defenition
 inputfolder="/temp/merge/"
 outputfolder="/temp/untagged/"
 originalfolder="/temp/recentlyadded/"
@@ -11,6 +10,24 @@ backupfolder="/temp/backup/"
 binfolder="/temp/delete/"
 m4bend=".m4b"
 logend=".log"
+
+#ensure the expected folder-structure
+mkdir -p "$inputfolder"
+mkdir -p "$outputfolder"
+mkdir -p "$originalfolder"
+mkdir -p "$fixitfolder"
+mkdir -p "$backupfolder"
+mkdir -p "$binfolder"
+
+#adjust the number of cores depending on the ENV CPU_CORES
+if [ -z "$CPU_CORES" ]
+then
+      echo "Using all CPU cores as not other defined."
+	  CPUcores=$(nproc --all)
+else
+      echo "Using $CPU_CORES as specified."
+	  CPUcores="$CPU_CORES"
+fi
 
 #change to the merge folder, keeps this clear and the script could be kept inside the container
 cd "$inputfolder" || return

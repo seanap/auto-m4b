@@ -109,7 +109,10 @@ RUN echo "---- INSTALL M4B-TOOL DEPENDENCIES ----" && \
 VOLUME /temp
 VOLUME /config
 
-ARG improve echo
+ENV PUID=""
+ENV PGID=""
+ENV CPU_CORES=""
+
 #Merge-Script importieren
 ADD runscript.sh /etc/service/bot/run
 ADD auto-m4b-tool.sh /

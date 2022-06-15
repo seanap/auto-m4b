@@ -6,3 +6,7 @@ services:
     volumes:
       - /path/to/config:/config
       - /path/to/temp:/temp
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - CPU_CORES=2
