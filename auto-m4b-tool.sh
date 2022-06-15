@@ -29,6 +29,16 @@ else
 	  CPUcores="$CPU_CORES"
 fi
 
+#adjust the interval of the runs depending on the ENV SLEEPTIME
+if [ -z "$SLEEPTIME" ]
+then
+      echo "Using standard 1 min sleep time."
+	  sleeptime=1m
+else
+      echo "Using $SLEEPTIME min sleep time."
+	  sleeptime="$SLEEPTIME"
+fi
+
 #change to the merge folder, keeps this clear and the script could be kept inside the container
 cd "$inputfolder" || return
 
@@ -106,7 +116,7 @@ while [ $m -ge 0 ]; do
 			fi
 		done
 	else
-		echo No folders detected, next run 5min...
-		sleep 1m
+		echo No folders detected, next run $sleeptime min...
+		sleep $sleeptime
 	fi
 done

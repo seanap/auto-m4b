@@ -112,6 +112,7 @@ VOLUME /config
 ENV PUID=""
 ENV PGID=""
 ENV CPU_CORES=""
+ENV SLEEPTIME=""
 
 #Merge-Script importieren
 ADD runscript.sh /etc/service/bot/run
