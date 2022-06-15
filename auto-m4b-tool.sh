@@ -19,7 +19,11 @@ mkdir -p "$fixitfolder"
 mkdir -p "$backupfolder"
 mkdir -p "$binfolder"
 
-chmod 777 -R /temp/
+#fix of the user for the new created folders
+username="$(whoami)"
+userid="$(id -u $username)"
+groupid="$(id -g $username)"
+chown -R $userid:$groupid /temp 
 
 #adjust the number of cores depending on the ENV CPU_CORES
 if [ -z "$CPU_CORES" ]
