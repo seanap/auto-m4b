@@ -82,6 +82,8 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - CPU_CORES=2
+      - SLEEPTIME=1m
 ```
 
 ## To Manually Set Chapters:

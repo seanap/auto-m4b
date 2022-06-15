@@ -1,8 +1,7 @@
 #!/bin/bash
 # set m to 1
 m=1
-# variable defenition
-CPUcores=$(nproc --all)
+#variable defenition
 inputfolder="/temp/merge/"
 outputfolder="/temp/untagged/"
 originalfolder="/temp/recentlyadded/"
@@ -11,6 +10,40 @@ backupfolder="/temp/backup/"
 binfolder="/temp/delete/"
 m4bend=".m4b"
 logend=".log"
+
+#ensure the expected folder-structure
+mkdir -p "$inputfolder"
+mkdir -p "$outputfolder"
+mkdir -p "$originalfolder"
+mkdir -p "$fixitfolder"
+mkdir -p "$backupfolder"
+mkdir -p "$binfolder"
+
+#fix of the user for the new created folders
+username="$(whoami)"
+userid="$(id -u $username)"
+groupid="$(id -g $username)"
+chown -R $userid:$groupid /temp 
+
+#adjust the number of cores depending on the ENV CPU_CORES
+if [ -z "$CPU_CORES" ]
+then
+      echo "Using all CPU cores as not other defined."
+	  CPUcores=$(nproc --all)
+else
+      echo "Using $CPU_CORES CPU cores as defined."
+	  CPUcores="$CPU_CORES"
+fi
+
+#adjust the interval of the runs depending on the ENV SLEEPTIME
+if [ -z "$SLEEPTIME" ]
+then
+      echo "Using standard 1 min sleep time."
+	  sleeptime=1m
+else
+      echo "Using $SLEEPTIME min sleep time."
+	  sleeptime="$SLEEPTIME"
+fi
 
 #change to the merge folder, keeps this clear and the script could be kept inside the container
 cd "$inputfolder" || return
@@ -89,7 +122,7 @@ while [ $m -ge 0 ]; do
 			fi
 		done
 	else
-		echo No folders detected, next run 5min...
-		sleep 1m
+		echo No folders detected, next run $sleeptime min...
+		sleep $sleeptime
 	fi
 done
