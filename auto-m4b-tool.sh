@@ -25,7 +25,7 @@ then
       echo "Using all CPU cores as not other defined."
 	  CPUcores=$(nproc --all)
 else
-      echo "Using $CPU_CORES as specified."
+      echo "Using $CPU_CORES CPU cores as defined."
 	  CPUcores="$CPU_CORES"
 fi
 

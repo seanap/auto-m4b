@@ -82,6 +82,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - CPU_CORES=2
 ```
 
 ## To Manually Set Chapters:
