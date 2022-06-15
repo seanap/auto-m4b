@@ -19,6 +19,8 @@ mkdir -p "$fixitfolder"
 mkdir -p "$backupfolder"
 mkdir -p "$binfolder"
 
+chmod 777 -R /temp/
+
 #adjust the number of cores depending on the ENV CPU_CORES
 if [ -z "$CPU_CORES" ]
 then
