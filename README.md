@@ -1,4 +1,7 @@
 # Auto-M4B
+
+[![Join the chat at https://gitter.im/Audiobook-Server/auto-m4b](https://badges.gitter.im/Audiobook-Server/auto-m4b.svg)](https://gitter.im/Audiobook-Server/auto-m4b?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This container is mostly based on the powerful [m4b-tool](https://github.com/sandreas/m4b-tool) made by sandreas  
 This repo is my fork of the fantastic [docker-m4b-tool](https://github.com/9Mad-Max5/docker-m4b-tool) created by 9Mad-Max5. 
 
