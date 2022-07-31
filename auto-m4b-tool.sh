@@ -2,12 +2,12 @@
 # set m to 1
 m=1
 #variable defenition
-inputfolder="/temp/merge/"
-outputfolder="/temp/untagged/"
-originalfolder="/temp/recentlyadded/"
-fixitfolder="/temp/fix"
-backupfolder="/temp/backup/"
-binfolder="/temp/delete/"
+inputfolder="${INPUT_FOLDER:-"/temp/merge/"}"
+outputfolder="${OUTPUT_FOLDER:-"/temp/untagged/"}"
+originalfolder="${ORIGINAL_FOLDER:-"/temp/recentlyadded/"}"
+fixitfolder="${FIXIT_FOLDER:-"/temp/fix"}"
+backupfolder="${BACKUP_FOLDER:-"/temp/backup/"}"
+binfolder="${BIN_FOLDER:-"/temp/delete/"}"
 m4bend=".m4b"
 logend=".log"
 
