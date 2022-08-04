@@ -58,7 +58,7 @@ temp
 
 ### Installation
 
-1. Creat a `temp` folder and keep the location in mind for Step 6 
+1. Create a `temp` folder and keep the location in mind for Step 6 
 2. Install docker https://docs.docker.com/engine/install/ubuntu/
 3. Manage docker as non-root https://docs.docker.com/engine/install/linux-postinstall/
 4. Install docker-compose https://docs.docker.com/compose/install/
