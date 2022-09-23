@@ -52,8 +52,12 @@ cd "$inputfolder" || return
 while [ $m -ge 0 ]; do
 
 	#copy files to backup destination
-	echo "Making a backup of the whole $originalfolder "
-	cp -Ru "$originalfolder"* $backupfolder
+	if [ "$MAKE_BACKUP" == "N" ]; then
+		echo "Skipping making a backup"
+	else
+		echo "Making a backup of the whole $originalfolder"
+		cp -Ru "$originalfolder"* $backupfolder
+	fi
 
 	#make sure all single file mp3's & m4b's are in their own folder
 	echo "Making sure all books are in their own folder"
