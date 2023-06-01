@@ -86,6 +86,7 @@ services:
       - PGID=1000
       - CPU_CORES=2
       - SLEEPTIME=1m
+      - MAKE_BACKUP=Y
 ```
 
 ## To Manually Set Chapters:
@@ -97,7 +98,7 @@ services:
 
 ## Advanced Options
 
-#### Edit the 
+#### Edit the script that is run
 You shouldn't need to change any options, but if you want to you will need to exec into the docker container. By default only vim text editor is installed, you will need to do a `apt-get update && apt-get install nano` if you want to use nano to edit the scipt.  
 * `docker exec -it auto-m4b sh -c 'vi auto-m4b-tool.sh'`  
 
@@ -105,7 +106,7 @@ You shouldn't need to change any options, but if you want to you will need to ex
 The script will automatically use all CPU cores available, to change the amount of cpu cores for the converting change the `--jobs` flag in the m4b-tool command, but do not set it higher than the amount of cores available.  
 
 #### Backup Folder
-For those copying files from another source into the `recentlyadded` folder, it might not make sense to waste time copying to the `backup` folder (because they were already copied from somewhere else).  Backing up is enabled by default.  To disable this copy operation, add the line `- MAKE_BACKUP=N` to the `environment:` section of your `docker-compose.yml` file.
+For those copying files from another source into the `recentlyadded` folder, it might not make sense to waste time copying to the `backup` folder (because they were already copied from somewhere else).  Backing up is enabled by default.  To disable this copy operation, change this line in your compose file: `- MAKE_BACKUP=N`.
 
 #### More Reading
 More m4b-tool options https://github.com/sandreas/m4b-tool#reference
