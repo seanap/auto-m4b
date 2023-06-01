@@ -1,4 +1,5 @@
-FROM phusion/baseimage:master
+FROM phusion/baseimage:jammy-1.0.1
+#FROM phusion/baseimage:master
 
 #Basic Container
 RUN echo "---- INSTALL RUNTIME PACKAGES ----" && \
