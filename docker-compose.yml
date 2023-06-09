@@ -1,12 +1,14 @@
 version: '3.7'
 services:
   auto-m4b:
-    image: seanap/auto-m4b
+    #image: seanap/auto-m4b
+    build: .
     container_name: auto-m4b
     volumes:
-      - /path/to/config:/config
-      - /path/to/temp:/temp
+      - ./config:/config
+      - ./temp:/temp
     environment:
       - PUID=1000
       - PGID=1000
       - CPU_CORES=2
+      - MAKE_BACKUP=N
