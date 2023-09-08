@@ -5,8 +5,8 @@ services:
     build: .
     container_name: auto-m4b
     volumes:
-      - ./config:/config
-      - ./temp:/temp
+      - /srv/dev-disk-by-uuid-BAB67C98B67C573B/share2/docker/appdata/autom4b:/config
+      - /srv/dev-disk-by-uuid-BAB67C98B67C573B/data/temp:/temp
     environment:
       - PUID=1000
       - PGID=1000
