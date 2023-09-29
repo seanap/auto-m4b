@@ -22,6 +22,8 @@ Use the [beets.io audible plugin](https://github.com/seanap/beets-audible) to fi
 * Right now book folders with nested subfolders will be moved to a /fix folder for manual filename/folder fixing.  It should be possible to modify the auto-m4b-tool.sh script to automatically prefix the subfoldername and move the files up a level, let me know if you know how to do this.  
 * The conversion process actually strips some tags and covers from the files, which is why you need to use a tagger (mp3tag or beets.io) before adding to Plex.
 
+## Need ARM Support?
+Change the image to `spencermksmith/auto-m4b`
 
 ## Using torrents and need to preserve seeding?
 In the settings of your client add this line to `Run external program on torrent completion`, it will copy all finished torrent files to your "recentlyadded" folder:
