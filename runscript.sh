@@ -21,6 +21,8 @@ if ! id -u "${PUID}" &>/dev/null; then
         group_id="${PGID}"
     fi
 
+    addgroup --gid "${group_id}" "${user_name}"
+
     adduser \
         --uid "${user_id}" \
         "${user_name}" \
