@@ -101,8 +101,8 @@ while [ $m -ge 0 ]; do
 				logfile="$outputfolder$book/$book$logend"
 				chapters=$(ls "$inputfolder$book"/*chapters.txt 2> /dev/null | wc -l)
 				if [ "$chapters" != "0" ]; then
-					echo Adjusting Chapters
-					mp4chaps -i "$inputfolder""$book"/*$m4bend
+				        echo "Merging chapters file found in directory named "$book" into media file."
+          				mp4chaps -i "$inputfolder$book"/*$m4bend
 					mv "$inputfolder$book" "$outputfolder"
 				else
 					echo Sampling $mpthree
