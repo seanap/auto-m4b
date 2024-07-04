@@ -68,18 +68,46 @@ while [ $m -ge 0 ]; do
 		fi
 	done
 
+	# Finds folders with nested subfolders - renames and flattens files into a single folder
+	echo "Flattening nested subfolders 3 levels deep or more and renaming files..."
+	find "$originalfolder" -mindepth 3 -type f \( -name '*.mp3' -o -name '*.m4b' -o -name '*.m4a' \) -print0 | 
+	while IFS= read -r -d '' file; do
+			# Get the relative path from the original folder
+			relative_path="${file#$originalfolder/}"
+			
+			# Split the path into an array
+			IFS='/' read -ra path_parts <<< "$relative_path"
+
+			# Only process if the file is at least 3 levels deep
+			if [ ${#path_parts[@]} -ge 4 ]; then
+					# Get the filename (last element)
+					filename="${path_parts[-1]}"
+					
+					# Get the grandparent directory
+					grandparent="${path_parts[3]}"
+
+					# Construct the new filename
+					new_filename=""
+					for ((i=4; i<${#path_parts[@]}-1; i++)); do
+							new_filename+="${path_parts[i]} - "
+					done
+					new_filename+="$filename"
+					
+					# Create the new path (2 levels deep)
+					new_path="$originalfolder/$grandparent/$new_filename"
+					
+					# Create the grandparent directory if it doesn't exist
+					mkdir -p "$(dirname "$new_path")"
+					
+					# Move and rename the file
+					mv -v "$file" "$new_path"
+			fi
+	done
+
 	#Move folders with multiple audiofiles to inputfolder
 	echo "Moving folders with 2 or more audiofiles to $inputfolder "
 	find "$originalfolder" -maxdepth 2 -mindepth 2 -type f \( -name '*.mp3' -o -name '*.m4b' -o -name '*.m4a' \) -print0 | xargs -0 -L 1 dirname | sort | uniq -c | grep -E -v '^ *1 ' | sed 's/^ *[0-9]* //' | while read i; do mv -v "$i" $inputfolder; done
 
-	#Move folders with nested subfolders to fixitfolder for manual fixing
-	echo "Nested subfolders are BAD moving to $fixitfolder"
-	find "$originalfolder" -maxdepth 3 -mindepth 3 -type f \( -name '*.mp3' -o -name '*.m4b' -o -name '*.m4a' \) -exec sh -c '
-		for f do
-			gp="$(basename "$(dirname "$(dirname "$f")")")"
-			printf "%s\n" "$gp"
-		done
-	' sh-find {} + | sort | uniq -d | while read j; do mv -v "$originalfolder$j" $fixitfolder; done
 
 	#Move single file mp3's to inputfolder
 	echo "Moving single file mp3's to $inputfolder "
