@@ -65,7 +65,7 @@ temp
 4. Install docker-compose https://docs.docker.com/compose/install/
 5. Create the compose file:  
     `nano docker-compose.yml`
-6. Paste the yaml code below into the compose file, and change the volume mount locations
+6. Paste the yaml code below into the compose file, and change the volume mount locations. It doesn't matter where you store your config folder but you need to have one.
 7. Put a test mp3 in the /temp/recentlyadded directory.
 8. Start the docker (It should convert the mp3 and leave it in your /temp/untagged directory. It runs automatically every 5 min)  
     `docker-compose up -d`
