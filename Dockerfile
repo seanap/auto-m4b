@@ -4,6 +4,7 @@ FROM phusion/baseimage:jammy-1.0.1
 #Basic Container
 RUN echo "---- INSTALL RUNTIME PACKAGES ----" && \
     apt-get update && apt-get install -y --no-install-recommends \
+    nasm \
     python3-pip \
     git \
     #ffmpeg \
